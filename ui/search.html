@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>twittor</title>
+    <link rel="stylesheet" type="text/css" href="./vendor/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./vendor/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/common.css">
+    <script src="./vendor/js/jquery-2.1.0.min.js"></script>
+    <script src="./vendor/js/bootstrap.min.js"></script>
+    <script src="./js/search.js"></script>
+</head>
+<body>
+    <div id="header" class="container">
+        <div class="header">
+            <ul class="nav nav-pills pull-right">
+                <li>
+                    <img class="header-user-icon plyphicon" src="./img/egg.png" alt="ユーザアイコン" align="middle">
+                    ユーザ名
+                </li>
+            </ul>
+            <a href="./index.html"><h3 class="text-muted">twittor</h3></a>
+        </div>
+    </div>
+    <div class="container main-contents">
+    <div class="form clearfix" role="form">
+        <div>
+            <h3>検索:<span id="search-word">けんさくわーど</span>
+                <a href="./timeline.html" role="button" class="btn btn-default pull-right btn-form-right">TL</a>
+            </h3>
+        </div>
+        <div class="form-group pull-left input-form-left">
+            <label class="sr-only" for="keyword">検索キーワード</label>
+            <input class="form-control" id="keyword" placeholder="search word">
+        </div>
+        <button id="search-btn" type="submit" class="btn btn-default pull-right btn-form-right">
+            <span class="glyphicon glyphicon-search"></span>
+        </button>
+    </div>
+    </div>
+</body>
+</html>
+

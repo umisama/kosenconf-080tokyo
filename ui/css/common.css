@@ -1,0 +1,55 @@
+/*** 全体 ***/
+.main-contents {
+   max-width: 320px;
+}
+
+#header {
+    background-color: #b8e5a0;
+}
+
+.header-user-icon {
+    background-color: #ccc003;
+    width: 15px;
+    height: 15px;
+    vertical-align: middle;
+}
+.header-user-id {
+    height: 15px;
+    line-height: 15px;
+}
+
+.tl-user-icon {
+    background-color: #3cdccc;
+    width: 40px;
+    height: 40px;
+    font-size: 40px;
+}
+
+.shout-status {
+    background-color: #ffffff;
+}
+
+hr {
+    border-width: 3px 0 0;
+}
+
+/*** form関連 ***/
+.input-form-left {
+    width: 82%;
+}
+.input-form-left > input {
+    margin: 0;
+}
+.btn-form-right {
+    width: 15%;
+}
+.form-signin {
+    padding-bottom: 15px;
+}
+input {
+    margin: 5px 0;
+}
+button {
+    width: 100%;
+}
+
