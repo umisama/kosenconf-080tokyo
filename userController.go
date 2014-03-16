@@ -10,7 +10,7 @@ type UserController struct{}
 
 // POST /api/user
 func (ctrl *UserController) Create(ctx context.Context) (err error) {
-	id := ctx.FormValue("name")
+	id := ctx.FormValue("id")
 	screen_name := ctx.FormValue("screen_name")
 	passwd := ctx.FormValue("password")
 	if id == "" || screen_name == "" || passwd == "" {

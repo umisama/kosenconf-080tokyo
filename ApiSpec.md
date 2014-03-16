@@ -3,7 +3,7 @@
 login
 
 ### request
-#### name
+#### id
 specifies a user login id. up to maximum of 255.
 this allows for only alphanumeric.
 #### password
@@ -26,7 +26,7 @@ nil
 create new user
 
 ### request
-#### name
+#### id
 specifies a new user login id. up to maximum of 255.
 this allows for only alphanumeric.
 #### screen_name
