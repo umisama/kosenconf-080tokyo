@@ -6,17 +6,20 @@ import (
 	"github.com/gorilla/sessions"
 	"github.com/stretchr/goweb"
 	"github.com/stretchr/goweb/context"
+	"github.com/stretchr/goweb/handlers"
 	log "github.com/umisama/golog"
 	"net"
 	"net/http"
 	"os"
 	"os/signal"
+	"regexp"
 	"time"
 )
 
 var (
 	logger        log.Logger
-	flagAddress   *string = flag.String("-addr", ":8080", "listen addr")
+	flagAddress   *string = flag.String("addr", ":8080", "listen addr")
+	flagDirPath   *string = flag.String("dir", "ui/", "path to static files dir")
 	dbmap         *gorp.DbMap
 	session_store = sessions.NewCookieStore([]byte("secure"))
 	session_name  = "twittor-session"
@@ -68,7 +71,12 @@ func mapRoutes() (err error) {
 	goweb.MapAfter(afterHandler)
 
 	// static files
-	goweb.MapStaticFile("/", "./ui")
+	goweb.MapStatic("/", *flagDirPath, func(c context.Context)(handlers.MatcherFuncDecision, error){
+		if regexp.MustCompile(`^api`).MatchString(c.Path().RawPath) {
+			return handlers.NoMatch, nil
+		}
+		return handlers.Match, nil
+	})
 
 	// apis
 	goweb.MapController("/api/session", &SessionController{})
