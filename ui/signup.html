@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="./css/common.css">
     <script type="text/javascript" src="./vendor/js/jquery-2.1.0.min.js"></script>
     <script type="text/javascript" src="./vendor/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="./js/index.js"></script>
+    <script type="text/javascript" src="./js/signup.js"></script>
 </head>
 <body>
     <div id="header" class="container">
@@ -20,18 +20,18 @@
     </div>
     <div class="container main-contents">
         <div class="form-signin">
-            <h3>twittor</h3>
+            <h3>twittor に参加</h3>
             <div class="form-group">
-                <label class="sr-only" for="userid">ユーザID</label>
-                <input class="form-control" id="userid" placeholder="userID">
+                <label class="sr-only" for="id">ID</label>
+                <input class="form-control" id="id" placeholder="ID">
+                <label class="sr-only" for="screen_name">スクリーンネーム</label>
+                <input class="form-control" id="screen_name" placeholder="ニックネーム">
                 <label class="sr-only" for="password">パスワード</label>
-                <input class="form-control" id="password" placeholder="password" type="password">
+                <input class="form-control" id="password" placeholder="パスワード" type="password">
             </div>
-            <button id="login-btn" class="btn btn-primary">LOGIN</button>
+            <button id="signup-btn" class="btn btn-primary">SIGNUP</button>
         </div>
     </div>
-    <a href="./signup.html" class="btn">SIGNUP</a>
-    <a id="del-session-btn" class="btn">セッション削除</a>
 </body>
 </html>
 
