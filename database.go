@@ -29,7 +29,7 @@ type Status struct {
 }
 
 func CreateUser(name, screen_name, password string) (err error) {
-	u := &User {
+	u := &User{
 		Name:       name,
 		ScreenName: screen_name,
 	}

@@ -9,7 +9,7 @@ import (
 type SessionController struct{}
 
 // GET /api/session
-func (ctrl *SessionController) ReadMany(ctx context.Context)(err error) {
+func (ctrl *SessionController) ReadMany(ctx context.Context) (err error) {
 	session, _ := session_store.Get(ctx.HttpRequest(), session_name)
 	if session.Values["username"] != nil {
 		return goweb.API.RespondWithError(ctx, http.StatusBadRequest, "has session")
@@ -38,7 +38,7 @@ func (ctrl *SessionController) ReadMany(ctx context.Context)(err error) {
 }
 
 // DELETE /api/session
-func (ctrl *SessionController) DeleteMany(ctx context.Context)(err error) {
+func (ctrl *SessionController) DeleteMany(ctx context.Context) (err error) {
 	session, _ := session_store.Get(ctx.HttpRequest(), session_name)
 
 	// clear user's session data
