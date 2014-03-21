@@ -12,7 +12,7 @@ type StatusesController struct{}
 // POST /api/statuses
 func (ctrl *StatusesController) Create(ctx context.Context) (err error) {
 	user := getUserNameFromCtx(ctx)
-	if user == "" {
+	if user == "" || !isSessionValid(ctx) {
 		return goweb.API.RespondWithError(ctx, http.StatusUnauthorized, "not enough query")
 	}
 
@@ -54,4 +54,17 @@ func getUserNameFromCtx(ctx context.Context) (name string) {
 	}
 	name = user_raw.(string)
 	return
+}
+
+func isSessionValid(ctx context.Context) bool {
+	session, _ := session_store.Get(ctx.HttpRequest(), session_name)
+	session_token := session.Values["token"]
+
+	session.Values["token"] = ""
+	session.Save(ctx.HttpRequest(), ctx.HttpResponseWriter())
+
+	if session_token == "" || session_token != ctx.FormValue("token") {
+		return false
+	}
+	return true
 }

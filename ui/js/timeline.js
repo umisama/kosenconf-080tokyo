@@ -26,16 +26,22 @@ $(function() {
 
     $("#shout-btn").click(function() {
         $.ajax({
-            type: "POST",
-            url: "/api/statuses",
-            data: "shout="+ $("#shout-str").val(),
-            success: function(msg) {
-                refreshTimeline();
-                $("#shout-str").val("")
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                var res = XMLHttpRequest.responseJSON;
-                alert(res.meta.code + " / " + res.meta.message);
+            type: "GET",
+            url: "/api/token",
+            success: function(msg1) {
+                $.ajax({
+                    type: "POST",
+                    url: "/api/statuses",
+                    data: "shout="+ $("#shout-str").val()+"&token="+msg1.content,
+                    success: function(msg) {
+                        refreshTimeline();
+                        $("#shout-str").val("")
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        var res = XMLHttpRequest.responseJSON;
+                        alert(res.meta.code + " / " + res.meta.message);
+                    }
+                });
             }
         });
     });

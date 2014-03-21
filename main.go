@@ -23,6 +23,7 @@ var (
 	dbmap         *gorp.DbMap
 	session_store = sessions.NewCookieStore([]byte("secure"))
 	session_name  = "twittor-session"
+	tokenlength   = 32
 )
 
 type ResponseMeta struct {
@@ -83,6 +84,7 @@ func mapRoutes() (err error) {
 	goweb.MapController("/api/statuses", &StatusesController{})
 	goweb.MapController("/api/user", &UserController{})
 	goweb.MapController("/api/search", &SearchController{})
+	goweb.MapController("/api/token", &TokenController{})
 
 	return nil
 }
