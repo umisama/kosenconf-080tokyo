@@ -71,7 +71,7 @@ func mapRoutes() (err error) {
 	goweb.MapAfter(afterHandler)
 
 	// static files
-	goweb.MapStatic("/", *flagDirPath, func(c context.Context)(handlers.MatcherFuncDecision, error){
+	goweb.MapStatic("/", *flagDirPath, func(c context.Context) (handlers.MatcherFuncDecision, error) {
 		if regexp.MustCompile(`^api`).MatchString(c.Path().RawPath) {
 			return handlers.NoMatch, nil
 		}

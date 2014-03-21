@@ -10,7 +10,7 @@ import (
 type SearchController struct{}
 
 // GET /api/session
-func (ctrl *SearchController) ReadMany(ctx context.Context)(err error) {
+func (ctrl *SearchController) ReadMany(ctx context.Context) (err error) {
 	query := ctx.FormValue("q")
 	if query == "" {
 		return goweb.API.RespondWithError(ctx, http.StatusUnauthorized, "not enough query")

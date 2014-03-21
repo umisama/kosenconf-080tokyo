@@ -25,7 +25,7 @@ func (ctrl *UserController) Create(ctx context.Context) (err error) {
 	return goweb.API.RespondWithData(ctx, nil)
 }
 
-func (ctrl *UserController)ReadMany(ctx context.Context)(err error) {
+func (ctrl *UserController) ReadMany(ctx context.Context) (err error) {
 	user := getUserNameFromCtx(ctx)
 	u, err := GetUserDetail(user)
 	if err != nil {
