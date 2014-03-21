@@ -24,3 +24,13 @@ func (ctrl *UserController) Create(ctx context.Context) (err error) {
 
 	return goweb.API.RespondWithData(ctx, nil)
 }
+
+func (ctrl *UserController)ReadMany(ctx context.Context)(err error) {
+	user := getUserNameFromCtx(ctx)
+	u, err := GetUserDetail(user)
+	if err != nil {
+		return goweb.API.RespondWithError(ctx, http.StatusInternalServerError, "error on database")
+	}
+
+	return goweb.API.RespondWithData(ctx, u)
+}

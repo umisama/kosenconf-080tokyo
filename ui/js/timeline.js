@@ -13,7 +13,16 @@ $(function() {
         });
     };
 
-    refreshTimeline();
+    var getUserName = function() {
+        $.ajax({
+            type: "GET",
+            url: "/api/user",
+            data: "",
+            success: function(msg) {
+                $("#username").text(msg.content)
+            },
+        });
+    };
 
     $("#shout-btn").click(function() {
         $.ajax({
@@ -30,4 +39,9 @@ $(function() {
             }
         });
     });
+
+    $("body").ready(function(){
+        refreshTimeline();
+        getUserName();
+    })
 });
