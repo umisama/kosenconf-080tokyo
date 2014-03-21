@@ -22,6 +22,7 @@ $(function() {
             data: "shout="+ $("#shout-str").val(),
             success: function(msg) {
                 refreshTimeline();
+                $("#shout-str").val("")
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
                 var res = XMLHttpRequest.responseJSON;
