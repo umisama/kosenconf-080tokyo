@@ -1,6 +1,7 @@
 package main
 
 import (
+	"crypto/md5"
 	"crypto/sha1"
 	"database/sql"
 	"github.com/coopernurse/gorp"
@@ -15,18 +16,24 @@ type User struct {
 	Password   string `db:"password" json:"-"`
 }
 
-func hash(val string) string {
+func hash(val, uname string) string {
+	// Create salt
+	salth := md5.New()
+	io.WriteString(salth, uname)
+	salt := string(salth.Sum(nil))
+
+	// Create hashed password
 	h := sha1.New()
-	io.WriteString(h, val)
+	io.WriteString(h, val+salt)
 	return string(h.Sum(nil))
 }
 
-func (u *User) SetPassword(val string) {
-	u.Password = hash(val)
+func (u *User) SetPassword(val, uname string) {
+	u.Password = hash(val, uname)
 }
 
-func (u *User) IsMatchPassword(val string) bool {
-	return (u.Password == hash(val))
+func (u *User) IsMatchPassword(val, uname string) bool {
+	return (u.Password == hash(val, uname))
 }
 
 type Status struct {
@@ -41,7 +48,7 @@ func CreateUser(name, screen_name, password string) (err error) {
 		Name:       name,
 		ScreenName: screen_name,
 	}
-	u.SetPassword(password)
+	u.SetPassword(password, name)
 
 	err = dbmap.Insert(u)
 	return
@@ -54,7 +61,7 @@ func GetUser(name, password string) (user *User, err error) {
 	}
 	user = user_raw.(*User)
 
-	if !user.IsMatchPassword(password) {
+	if !user.IsMatchPassword(password, name) {
 		user = nil
 		return
 	}
