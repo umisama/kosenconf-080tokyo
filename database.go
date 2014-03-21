@@ -13,6 +13,10 @@ type User struct {
 	Password   string `db:"password" json:"-"`
 }
 
+func (u *User) SetPassword(val string) {
+	u.Password = val
+}
+
 func (u *User) IsMatchPassword(val string) bool {
 	return (u.Password == val)
 }
@@ -25,11 +29,13 @@ type Status struct {
 }
 
 func CreateUser(name, screen_name, password string) (err error) {
-	err = dbmap.Insert(&User{
+	u := &User {
 		Name:       name,
 		ScreenName: screen_name,
-		Password:   password,
-	})
+	}
+	u.SetPassword(password)
+
+	err = dbmap.Insert(u)
 	return
 }
 
