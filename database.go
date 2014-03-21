@@ -1,9 +1,11 @@
 package main
 
 import (
+	"crypto/sha1"
 	"database/sql"
 	"github.com/coopernurse/gorp"
 	_ "github.com/mattn/go-sqlite3"
+	"io"
 	"time"
 )
 
@@ -13,12 +15,18 @@ type User struct {
 	Password   string `db:"password" json:"-"`
 }
 
+func hash(val string) string {
+	h := sha1.New()
+	io.WriteString(h, val)
+	return string(h.Sum(nil))
+}
+
 func (u *User) SetPassword(val string) {
-	u.Password = val
+	u.Password = hash(val)
 }
 
 func (u *User) IsMatchPassword(val string) bool {
-	return (u.Password == val)
+	return (u.Password == hash(val))
 }
 
 type Status struct {
