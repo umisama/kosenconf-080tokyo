@@ -1,7 +1,7 @@
 $(function() {
     var template = Handlebars.compile($("#shout-template").html());
     var refreshTimeline = function() {
-        $("#search-word").html($("#keyword").val());
+        $("#search-word").text($("#keyword").val());
 
         var list = $("#shout-list").html("");
         $.ajax({
